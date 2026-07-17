@@ -1,106 +1,127 @@
-// Hima Cinema — coded hero animation (Meraas-style scene player)
-// Scenes crossfade while their images move on live GPU transforms.
-(function () {
-  const stage = document.querySelector('.cinema');
-  if (!stage) return;
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>من نحن — كاما العقارية | حِمى</title>
+<meta name="description" content="كاما العقارية دار تطوير متخصصة في عمّان تقوم على الحرفية والشفافية والرعاية بعد التسليم.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Marcellus&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/v2.css">
+<link rel="icon" type="image/svg+xml" href="assets/logo-original.svg">
+</head>
+<body class="v2 inner-page">
+<a class="skip" href="#story">تجاوز إلى المحتوى</a>
+<div class="loader" aria-hidden="true">
+  <div class="dots"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="word">KAMA</div>
+</div>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="index-ar.html">
+      <img class="logo-light" src="assets/logo-original-light.svg" alt="كاما العقارية">
+      <img class="logo-dark" src="assets/logo-original.svg" alt="">
+    </a>
+    <div class="head-right">
+      <a class="lang-toggle" href="about.html" lang="en">English</a>
+      <button class="menu-btn" aria-expanded="false" aria-controls="overlay-menu">
+        القائمة
+        <span class="lines"><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="overlay-menu" id="overlay-menu">
+  <div class="inner">
+    <nav aria-label="القائمة الرئيسية">
+      <a href="index-ar.html">الرئيسية</a>
+      <a href="about-ar.html">من نحن</a>
+      <a href="projects-ar.html">الفلل</a>
+      <a href="contact-ar.html">اتصل بنا</a>
+      <a href="index-ar.html#interest">سجّل اهتمامك</a>
+    </nav>
+    <div class="side">
+      <span class="k">للاستفسار</span>
+      <span dir="ltr">info@kamaproperties.net</span><br>
+      عمّان، الأردن<br><br>
+      <span class="k">الدوام</span>
+      الأحد – الخميس، 9:00 – 18:00
+    </div>
+  </div>
+</div>
+<section class="page-hero" style="padding-top:190px">
+  <div class="wrap">
+    <div class="elevation"><span class="dots"><i></i><i></i><i></i><i></i><i></i></span></div>
+    <p class="kicker">من نحن</p>
+    <h1>بُنيت في عمّان، لمن يحبّونها.</h1>
+    <p class="lede">كاما العقارية دار تطوير متخصصة تقوم على قناعة واحدة: أجمل البيوت يصنعها مطوّرون يبنون القليل ويعتنون بالكثير.</p>
+  </div>
+</section>
 
-  const scenes = Array.from(stage.querySelectorAll('.scene'));
-  // scenes may carry real footage: <video muted loop playsinline> inside the scene
-  scenes.forEach((s) => {
-    const v = s.querySelector('video');
-    if (v) { s.classList.add('has-video'); v.muted = true; }
-  });
-  const segs = Array.from(stage.querySelectorAll('.cinema-progress button'));
-  const canvas = stage.querySelector('.cinema-atmo');
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const SCENE_MS = 7600;
+<section class="section section--paper" id="story">
+  <div class="wrap">
+    <div class="split bleed-right">
+      <div class="reveal">
+        <p class="kicker">قصتنا</p>
+        <h2>لماذا وُجدت كاما.</h2>
+        <p class="lede" style="margin-bottom:18px">سوق الفخامة في عمّان مليء بالوعود، وما ينقصه هو البرهان. أسسنا كاما العقارية لنطوّر الفلل كما يجب أن تُطوَّر — بمواد صادقة، وهندسة منضبطة، وتشطيب يصمد أمام أدقّ نظرة من المشتري.</p>
+        <p class="lede">باكورة مشاريعنا «حِمى» صغيرة عن قصد، وموقعها اختير بالعناية نفسها — طرف هادئ من عمّان يطل على غابة من الأشجار. بناء القليل يتيح لنا أن نقف خلف كل متر مربع، وأن تشتري أنت من أناس يعرفون بنيانهم عن ظهر قلب.</p>
+      </div>
+      <div class="media reveal"><img src="assets/entrance-day.jpg" alt="مدخل إحدى فلل حِمى بين أشجار السرو"></div>
+    </div>
+  </div>
+</section>
 
-  let idx = 0, timer = null;
+<section class="section section--deep craft">
+  <div class="wrap">
+    <p class="kicker reveal">قيمنا</p>
+    <h2 class="reveal" style="margin-bottom:20px">ثلاثة التزامات، نفي بها في كل مشروع.</h2>
+    <div class="row reveal"><div class="no">٠١</div><h3>الحِرفية</h3><p>حجر محلي، ومقاولون مشهود لهم، ومواصفات نقبلها في بيوتنا نحن. الجودة تُفحص ولا تُفترض — في كل مرحلة من البناء.</p></div>
+    <div class="row reveal"><div class="no">٠٢</div><h3>الشفافية</h3><p>أسعار واضحة، ومواعيد واضحة، وأوراق واضحة. ستعرف دائمًا ماذا تشتري بالضبط، وما الذي يشمله، ومتى يكون جاهزًا.</p></div>
+    <div class="row reveal"><div class="no">٠٣</div><h3>رعاية بعد التسليم</h3><p>علاقتنا لا تنتهي عند تسليم المفتاح. نقف خلف فللنا بعد سكنك فيها، لأن اسمنا يبقى على البناء طويلًا بعد البيع.</p></div>
+  </div>
+</section>
 
-  function show(n) {
-    const prev = idx;
-    idx = (n + scenes.length) % scenes.length;
-    scenes.forEach((s, i) => {
-      if (i === idx) { s.classList.add('active'); s.classList.remove('exit'); }
-      else if (i === prev && s.classList.contains('active')) {
-        s.classList.remove('active'); s.classList.add('exit');
-        setTimeout(() => s.classList.remove('exit'), 2500);
-      } else { s.classList.remove('active', 'exit'); }
-    });
-    segs.forEach((b, i) => {
-      b.style.setProperty('--t', SCENE_MS + 'ms');
-      b.classList.toggle('active', i === idx);
-      b.classList.toggle('done', i < idx);   // wrap to 0 clears all — full reset
-    });
-    stage.classList.toggle('is-dusk', scenes[idx].dataset.dusk === 'true');
-  }
+<section class="section section--ink quote-band">
+  <div class="wrap">
+    <div class="elevation elevation--light reveal"><span class="dots"><i></i><i></i><i></i><i></i><i></i></span></div>
+    <blockquote class="reveal">«نفضّل أن نسلّم ثلاث فلل نفخر بها، على ثلاثين نعتذر عنها.»</blockquote>
+    <cite class="reveal">وعد كاما</cite>
+  </div>
+</section>
 
-  function start() {
-    stop();
-    timer = setInterval(() => show(idx + 1), SCENE_MS);
-  }
-  function stop() { if (timer) clearInterval(timer); timer = null; }
+<section class="cta-panel">
+  <h2 class="reveal">شاهد ما نبنيه.</h2>
+  <p class="reveal">باب تسجيل الاهتمام بمشروع حِمى مفتوح الآن.</p>
+  <div class="cta-row reveal" style="justify-content:center">
+    <span class="magnetic"><a class="btn btn-ghost" href="projects-ar.html">الفلل</a></span>
+    <span class="magnetic"><a class="btn btn-primary" href="index-ar.html#interest">سجّل اهتمامك</a></span>
+  </div>
+</section>
 
-  // progress segments are clickable, like Meraas's slide bars
-  segs.forEach((b, i) => b.addEventListener('click', () => { show(i); start(); }));
-
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) stop(); else if (!reduced) start();
-  });
-
-  // decode every scene image up front — a fade must never wait on a JPEG decode
-  scenes.forEach((s) => {
-    const im = s.querySelector('img');
-    if (im && im.decode) im.decode().catch(() => {});
-  });
-
-  function reveal() { stage.classList.add('ready'); }
-  const first = scenes[0] && scenes[0].querySelector('img, video');
-  if (first && first.tagName === 'IMG' && first.decode) {
-    first.decode().then(reveal).catch(reveal);
-    setTimeout(reveal, 2600); // safety net on slow connections
-  } else { reveal(); }
-
-  if (reduced) { show(0); return; }
-  show(0); start();
-
-  // ---- atmosphere: slow warm particles over dusk scenes ----
-  if (canvas && !reduced && window.innerWidth > 720) {
-    const ctx = canvas.getContext('2d');
-    let W, H, parts = [];
-    function size() {
-      W = canvas.width = stage.clientWidth;
-      H = canvas.height = stage.clientHeight;
-    }
-    size();
-    window.addEventListener('resize', size);
-    const N = 36;
-    for (let i = 0; i < N; i++) {
-      parts.push({
-        x: Math.random(), y: Math.random(),
-        r: 0.8 + Math.random() * 1.8,
-        vx: (Math.random() - 0.5) * 0.00006,
-        vy: -0.00003 - Math.random() * 0.00006,
-        a: 0.15 + Math.random() * 0.35,
-        ph: Math.random() * Math.PI * 2,
-      });
-    }
-    let last = performance.now();
-    function tick(now) {
-      const dt = Math.min(now - last, 50); last = now;
-      ctx.clearRect(0, 0, W, H);
-      for (const p of parts) {
-        p.x += p.vx * dt; p.y += p.vy * dt; p.ph += dt * 0.0012;
-        if (p.y < -0.02) { p.y = 1.02; p.x = Math.random(); }
-        if (p.x < -0.02) p.x = 1.02; if (p.x > 1.02) p.x = -0.02;
-        const tw = 0.6 + 0.4 * Math.sin(p.ph);
-        ctx.beginPath();
-        ctx.arc(p.x * W, p.y * H, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(233,196,137,${(p.a * tw).toFixed(3)})`;
-        ctx.fill();
-      }
-      requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }
-})();
+<footer class="footer-v2">
+  <div class="grid">
+    <div><img src="assets/logo-original-light.svg" alt="كاما العقارية" style="height:72px"></div>
+    <div>
+      <span class="k">استكشف</span>
+      <a href="index-ar.html#hima">حِمى</a>
+      <a href="index-ar.html#setting">الموقع</a>
+      <a href="projects-ar.html">الفلل</a>
+    </div>
+    <div>
+      <span class="k">تواصل</span>
+      <a href="mailto:info@kamaproperties.net" dir="ltr">info@kamaproperties.net</a>
+      <a href="index-ar.html#interest">سجّل اهتمامك</a>
+    </div>
+  </div>
+  <div class="giant" aria-hidden="true">KAMA</div>
+  <div class="base">
+    <span>© 2026 كاما العقارية. عمّان، الأردن.</span>
+    <span>kamaproperties.net</span>
+  </div>
+</footer>
+<script src="js/v2.js"></script>
+</body>
+</html>
