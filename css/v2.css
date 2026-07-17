@@ -33,6 +33,7 @@
 .v2 .site-header .bar{ flex-direction:row; justify-content:space-between; padding-block:14px; }
 .v2 .brand img{ height:128px; transition:height .45s var(--ease-lux); }
 .v2 .site-header.solid{
+  background:rgba(237,232,221,.95);
   background:color-mix(in srgb, var(--stone) 92%, transparent);
   border-color:var(--line); backdrop-filter:blur(12px);
 }
@@ -150,6 +151,7 @@
 .footer-v2 a{ color:rgba(237,232,221,.75); display:block; line-height:2.1; }
 .footer-v2 a:hover{ color:var(--champagne-lt); }
 .footer-v2 .giant{
+  max-width:100vw; overflow:hidden;
   font-family:var(--font-display); text-align:center; line-height:.9;
   font-size:clamp(4.5rem, 17vw, 15rem); color:rgba(237,232,221,.14);
   letter-spacing:.06em; user-select:none; transform:translateY(12%);
@@ -224,6 +226,7 @@ a:focus-visible, button:focus-visible{ outline:2px solid var(--champagne); outli
 
 /* inner pages: no hero behind the header — solid from the first pixel */
 .inner-page .site-header{
+  background:rgba(237,232,221,.95);
   background:color-mix(in srgb, var(--stone) 92%, transparent);
   border-color:var(--line); backdrop-filter:blur(12px);
 }
@@ -262,6 +265,7 @@ a:focus-visible, button:focus-visible{ outline:2px solid var(--champagne); outli
   background:rgba(237,232,221,.03);
 }
 .cta-watermark{
+  max-width:100vw; overflow:hidden;
   position:absolute; inset:auto 0 0 0; z-index:0; text-align:center;
   font-family:"IBM Plex Sans Arabic",sans-serif; font-weight:600;
   font-size:clamp(8rem,26vw,22rem); line-height:.8; color:rgba(237,232,221,.045);
@@ -270,3 +274,40 @@ a:focus-visible, button:focus-visible{ outline:2px solid var(--champagne); outli
 .cta-panel{ position:relative; overflow:hidden; }
 .cta-panel > *{ position:relative; z-index:1; }
 @media (max-width:900px){ .cta-panel .cta-grid{ grid-template-columns:1fr; } }
+
+
+/* phone must never side-scroll (the villa rail keeps its own, contained, swipe) */
+html, body{ overflow-x:hidden; position:relative; }
+
+/* inner pages never show the preloader; homepage shows it once per session (JS) */
+.inner-page .loader{ display:none; }
+.loader.instant{ transition:none; opacity:0; visibility:hidden; }
+
+
+/* team sweep: phone-first corrections */
+/* 1. mobile browsers' collapsing address bar makes 100vh jumpy — use svh where supported */
+.cinema{ min-height:min(var(--hero-h, 100vh), 960px); }
+
+/* 2. progress bars are 3px tall — a fingertip needs a bigger invisible target */
+.cinema-progress button{ position:relative; }
+.cinema-progress button::before{ content:""; position:absolute; inset:-14px 0; }
+
+/* 3. the three figures cramp on narrow screens — stack them with breathing room */
+@media (max-width:640px){
+  .figures-v2{ grid-template-columns:1fr; }
+  .figures-v2 div{ padding:26px 20px; }
+}
+
+
+/* single-statement figure band */
+.figures-v2--solo{ grid-template-columns:1fr; max-width:640px; margin-inline:auto; border:1px solid var(--line); }
+
+/* villa cards are links to their chapter on the residences page */
+.rail a.card{ display:block; color:inherit; text-decoration:none; }
+.rail .card .tag .meta::after{
+  content:"Explore \2192"; display:block; margin-top:6px;
+  font-size:.68rem; letter-spacing:.28em; text-transform:uppercase; color:var(--champagne-lt);
+}
+[dir="rtl"] .rail .card .tag .meta::after{ content:"استكشف \2190"; letter-spacing:0; }
+/* anchored villa chapters land below the fixed header */
+[id^="villa-"]{ scroll-margin-top:120px; }
