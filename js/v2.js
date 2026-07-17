@@ -2,9 +2,22 @@
 (function () {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ---- preloader lifts when the hero's first image is ready ----
+  // stable hero height on mobile: measured once, not re-measured while the
+  // address bar collapses (the source of mid-scroll layout flutter)
+  function setHeroH() {
+    document.documentElement.style.setProperty('--hero-h', window.innerHeight + 'px');
+  }
+  setHeroH();
+  window.addEventListener('orientationchange', () => setTimeout(setHeroH, 300));
+
+  // ---- preloader: plays once per session on the homepage only ----
   const loader = document.querySelector('.loader');
   function lift() { if (loader) loader.classList.add('lift'); }
+  let seen = false;
+  try { seen = sessionStorage.getItem('kamaSeen') === '1'; sessionStorage.setItem('kamaSeen', '1'); } catch (e) {}
+  if (loader && (seen || document.body.classList.contains('inner-page'))) {
+    loader.classList.add('instant', 'lift');
+  }
   const firstImg = document.querySelector('.cinema .scene img');
   if (firstImg && firstImg.decode) {
     firstImg.decode().then(() => setTimeout(lift, reduced ? 0 : 500)).catch(lift);
@@ -83,7 +96,9 @@
       down = true; startX = e.clientX; startL = rail.scrollLeft;
       rail.classList.add('grabbing'); rail.setPointerCapture(e.pointerId);
     });
-    rail.addEventListener('pointermove', (e) => { if (down) rail.scrollLeft = startL - (e.clientX - startX); });
+    let moved = 0;
+    rail.addEventListener('pointermove', (e) => { if (down) { moved = Math.abs(e.clientX - startX); rail.scrollLeft = startL - (e.clientX - startX); } });
+    rail.addEventListener('click', (e) => { if (moved > 8) { e.preventDefault(); } moved = 0; }, true);
     ['pointerup','pointercancel'].forEach((ev) => rail.addEventListener(ev, () => { down = false; rail.classList.remove('grabbing'); }));
   }
 
@@ -109,7 +124,7 @@
 
   // ---- scroll-linked parallax layers ----
   const px = document.querySelectorAll('[data-parallax]');
-  if (px.length && !reduced) {
+  if (px.length && !reduced && window.matchMedia('(pointer:fine)').matches) {
     let pTick = false;
     const drive = () => {
       px.forEach((el) => {
