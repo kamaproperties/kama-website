@@ -94,13 +94,22 @@
     let down = false, startX = 0, startL = 0;
     rail.addEventListener('pointerdown', (e) => {
       down = true; startX = e.clientX; startL = rail.scrollLeft;
-      rail.classList.add('grabbing'); rail.setPointerCapture(e.pointerId);
+      rail.classList.add('grabbing');
     });
     let moved = 0;
     rail.addEventListener('pointermove', (e) => { if (down) { moved = Math.abs(e.clientX - startX); rail.scrollLeft = startL - (e.clientX - startX); } });
     rail.addEventListener('click', (e) => { if (moved > 8) { e.preventDefault(); } moved = 0; }, true);
-    ['pointerup','pointercancel'].forEach((ev) => rail.addEventListener(ev, () => { down = false; rail.classList.remove('grabbing'); }));
+    ['pointerup','pointercancel','pointerleave'].forEach((ev) => rail.addEventListener(ev, () => { down = false; rail.classList.remove('grabbing'); }));
   }
+
+  // ---- arriving with ?villa=A preselects that villa in the form ----
+  try {
+    const v = new URLSearchParams(location.search).get('villa');
+    const sel = document.getElementById('v-villa');
+    if (v && sel) {
+      Array.from(sel.options).forEach((o) => { if (o.text.includes(v.toUpperCase())) sel.value = o.value || o.text; });
+    }
+  } catch (e) {}
 
   // ---- interest form (FormSubmit) ----
   document.querySelectorAll('form[data-eoi]').forEach((form) => {
