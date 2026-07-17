@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" preserveAspectRatio="xMidYMid slice">
+  <rect width="800" height="560" fill="#E4DCCB"/>
+  <rect y="440" width="800" height="120" fill="#D5CBB4"/>
+  <g stroke="#211913" stroke-width="3" fill="none">
+    <rect x="140" y="200" width="360" height="240" fill="#F4EFE3"/>
+    <rect x="500" y="260" width="160" height="180" fill="#EAE2D0"/>
+    <rect x="180" y="240" width="120" height="90" fill="#C8B892"/>
+    <rect x="340" y="240" width="120" height="90" fill="#C8B892"/>
+    <rect x="380" y="360" width="80" height="80"/>
+    <line x1="140" y1="200" x2="500" y2="200" stroke-width="8"/>
+    <rect x="530" y="290" width="100" height="70" fill="#C8B892"/>
+    <line x1="100" y1="440" x2="700" y2="440" stroke-width="5"/>
+  </g>
+  <circle cx="640" cy="120" r="46" fill="#B08D4F" opacity="0.55"/>
+  <g fill="#5A5A40">
+    <ellipse cx="90" cy="430" rx="38" ry="30"/><rect x="86" y="430" width="7" height="26" fill="#3E3223"/>
+    <ellipse cx="720" cy="435" rx="34" ry="26"/><rect x="716" y="435" width="7" height="22" fill="#3E3223"/>
+  </g>
+</svg>
