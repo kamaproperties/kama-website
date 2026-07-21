@@ -348,5 +348,10 @@ html, body{ overflow-x:hidden; position:relative; }
   .cta-watermark{ margin-bottom:-24px; }
 }
 
-/* hero footage: fills the opening scene; the image beneath is the fallback */
-.scene-vid{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+/* the setting film: covers the band; the photo beneath is the fallback */
+.band-vid{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+/* Residences: A glance of the view */
+.view-glance{ padding-block:clamp(72px,9vw,130px); background:var(--ink); }
+.view-glance h2{ color:#F6F1E6; }
+.film-frame{ margin-top:clamp(28px,4vw,48px); border-top:3px solid var(--champagne); box-shadow:0 30px 70px rgba(0,0,0,.45); }
+.film-frame video{ display:block; width:100%; height:auto; }
