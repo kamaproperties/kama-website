@@ -1,65 +1,46 @@
-# Claude Development Guidelines for Kama Website
+# CLAUDE.md — Kama Properties / Hima site
 
-## Quality Check Process
+Static site: plain HTML, CSS and JS, no build step, no tests. See `README.md` for the page list, the hero scene player and the forms.
 
-**Every change must go through multi-stage quality checks before being presented to the user.** No exceptions.
+## Brand criteria: luxury website, no hard selling
 
-### Required Quality Checks Before Delivery
+Every change is judged against this line first. The site should feel like a private brochure, not a sales funnel.
 
-Each change must be verified against these three criteria:
+- **Invitational, never urgent.** Existing CTA copy sets the register: "Register Your Interest", "Schedule a Private Visit", "Discover Hima". Never introduce countdowns, "limited units", "book now", "don't miss out", pop-ups, exit-intent, sticky sale bars, pricing badges or discount language.
+- **Restraint in every element.** Generous whitespace, one primary action per view, few words. If a section can lose a sentence, it should.
+- **The properties carry the message.** Imagery, silence and craft do the persuading; copy describes, it does not push.
+- **Stay inside the palette and type system.** Tokens live in `css/style-r6.css` (`--stone`, `--paper`, `--ink`, `--oxblood`, `--champagne`). Champagne gold is an accent used sparingly, never a fill. Display type is Marcellus; body is Jost (IBM Plex Sans Arabic on `dir="rtl"` pages). No new colours or fonts without asking.
+- **Motion is slow and quiet.** Long eased transitions, crossfades, gentle pans. Nothing bounces, flashes or auto-plays sound. Respect `prefers-reduced-motion`.
 
-1. **Design Criteria** - Does the change align with design principles?
-   - Visual consistency and hierarchy
-   - Responsive behavior across devices
-   - Accessibility standards (WCAG)
-   - Code quality and maintainability
+## Mandatory quality process — before anything reaches the user
 
-2. **Request Alignment** - Does it actually implement what was asked for?
-   - Verify against the original request
-   - Ensure scope matches expectations
-   - Check for unintended side effects or scope creep
+No change, whether requested by the user or proposed by Claude, is shown until it has passed **all three checks, run as separate passes**. One pass finding nothing is not a result; re-read with fresh eyes. This applies to a one-word copy edit as much as a new section.
 
-3. **Functionality Verification** - Does it actually work?
-   - Test the golden path
-   - Test edge cases
-   - Verify no regressions in existing features
-   - Run linting, type checking, and tests
+### Check 1 — Design criteria
+- Re-read the brand criteria above and confirm nothing in the change pushes, pressures or clutters.
+- Palette, type, spacing and motion match the existing system; no ad-hoc values where a token exists.
+- Layout holds at phone, tablet and desktop widths.
+- Accessible: real alt text, visible focus states, contrast, semantic headings, `aria-*` on interactive controls kept intact.
 
-### Delivery Standards
+### Check 2 — Is it what was asked for
+- Restate the request in one line and diff the change against it. Nothing missing, nothing extra.
+- English and Arabic mirrors (`*-ar.html`) both updated when the change touches shared content, and the Arabic reads naturally (RTL layout, correct font).
+- Edits went to the **live** files only: `css/style-r6.css`, `css/v2-r13.css`, `js/v2-r6.js`, `js/cinema.js`. Older revisions in `css/` and `js/` are history; do not edit them and do not link new ones without asking.
 
-- Changes must pass all three quality checks before presentation
-- Test in the actual application, not just in tests
-- Screenshots or demos should show working functionality
-- Only show user-facing work that is validated and complete
+### Check 3 — Does it work
+- Open the changed pages in a browser (headless Chromium is available) and exercise the change: the happy path plus the awkward one (menu open, language toggle, form submit, scene player, reduced motion).
+- No console errors, no broken links or anchors, no missing assets, no regressions on the other pages that share the shell.
+- Validate the HTML that was touched; the site has no build step to catch mistakes.
 
-## Website Criteria: Luxury, No Hard Selling
+When presenting the change, state briefly that the three checks were run and what was verified. If anything could not be verified (for example, a real form submission), say so explicitly rather than implying it was tested.
 
-The Kama website embodies a **luxury brand aesthetic** with a subtle, sophisticated approach to marketing.
+## Proactive suggestions
 
-### Core Principles
+Alongside any task, and whenever a review of the site surfaces one, offer improvements that move the site closer to the brand criteria. Keep each suggestion short, tie it to a specific page or element, and explain why it reads as more luxurious or less salesy. Wait for approval before implementing; suggestions are offered, never slipped into the requested change.
 
-- **Elegance over aggression** - Refined presentation without pushy sales tactics
-- **Aspiration through curation** - Showcase premium properties and lifestyle quality
-- **Understated confidence** - Let the properties speak for themselves
-- **Sophisticated user experience** - Smooth, intuitive, uncluttered design
-
-### What This Means for Changes
-
-- Avoid call-to-action buttons that feel urgent or demanding
-- Use whitespace and breathing room generously
-- Choose premium imagery and refined typography
-- Subtly guide users rather than interrupt them
-- Focus on information and experience quality
-- Remove friction without adding pressure
-
-## Suggesting Improvements
-
-When reviewing your requirements or changes, I should:
-
-- **Proactively suggest refinements** that align with the luxury, no-hard-selling aesthetic
-- Identify opportunities to enhance elegance and user experience
-- Point out any elements that feel out of brand or too commercial
-- Recommend improvements to spacing, typography, or visual hierarchy
-- Suggest content framing that feels more premium or sophisticated
-
-Present these suggestions clearly so you can review and approve them before implementation.
+Look especially for:
+- Copy that pushes rather than invites, or that says more than it needs to.
+- Elements competing for attention where one should lead.
+- Places where imagery, whitespace or a slower transition would say more than text.
+- Inconsistencies between the English and Arabic experience.
+- Anything that feels like a listing portal or a sales funnel rather than a private introduction.
