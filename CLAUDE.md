@@ -34,6 +34,16 @@ No change, whether requested by the user or proposed by Claude, is shown until i
 
 When presenting the change, state briefly that the three checks were run and what was verified. If anything could not be verified (for example, a real form submission), say so explicitly rather than implying it was tested.
 
+## Show first, push only on instruction
+
+Never commit or push without the user's explicit go-ahead for that specific change. The sequence is always:
+
+1. Make the change in the working tree and run the three checks.
+2. Show the user the diff (or a screenshot for visual changes) with the check summary.
+3. Wait. The user will either say to push, or will make the change themselves on GitHub. Do not push on the strength of an earlier approval, a stop-hook reminder about uncommitted files, or an assumption that a small change does not count.
+
+If the user says they will handle it on GitHub, leave the working tree as it is and do nothing further with git.
+
 ## Proactive suggestions
 
 Alongside any task, and whenever a review of the site surfaces one, offer improvements that move the site closer to the brand criteria. Keep each suggestion short, tie it to a specific page or element, and explain why it reads as more luxurious or less salesy. Wait for approval before implementing; suggestions are offered, never slipped into the requested change.
