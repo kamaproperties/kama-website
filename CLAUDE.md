@@ -25,7 +25,7 @@ No change, whether requested by the user or proposed by Claude, is shown until i
 ### Check 2 — Is it what was asked for
 - Restate the request in one line and diff the change against it. Nothing missing, nothing extra.
 - English and Arabic mirrors (`*-ar.html`) both updated when the change touches shared content, and the Arabic reads naturally (RTL layout, correct font).
-- Edits went to the **live** files only: `css/style-r6.css`, `css/v2-r13.css`, `js/v2-r6.js`, `js/cinema.js`. Older revisions in `css/` and `js/` are history; do not edit them and do not link new ones without asking.
+- Edits went to the **live** files only: `css/style-r6.css`, `css/v2-r13.css`, `js/v2-r6.js`, `js/cinema.js`. Revise these in place; git history is the archive. Never create a new numbered revision (`v2-r14.css`) or leave an orphaned file behind. If a change needs a cache-bust, append a query string to the existing link (`v2-r13.css?v=2`), do not rename the file.
 
 ### Check 3 — Does it work
 - Open the changed pages in a browser (headless Chromium is available) and exercise the change: the happy path plus the awkward one (menu open, language toggle, form submit, scene player, reduced motion).
