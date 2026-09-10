@@ -21,6 +21,7 @@
 
   --max: 1200px;
   --pad: clamp(20px, 5vw, 64px);
+  --bleed: calc((100vw - min(var(--max), 100vw)) / 2 + var(--pad)); /* distance from the wrap's content edge to the viewport edge */
 }
 
 *{ box-sizing:border-box; margin:0; padding:0; }
@@ -183,8 +184,8 @@ h1,h2,h3,.display{ font-family:var(--font-display); font-weight:400; line-height
 .split{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,6vw,84px); align-items:center; }
 .split .media{ border:none; box-shadow:0 60px 90px -50px rgba(33,25,19,.55); }
 /* images that run to the viewport edge */
-.bleed-right .media{ margin-right:calc(50% - 50vw); }
-.bleed-left .media{ margin-left:calc(50% - 50vw); }
+.bleed-right .media{ margin-right:calc(-1 * var(--bleed)); }
+.bleed-left .media{ margin-left:calc(-1 * var(--bleed)); }
 /* editorial overlap: text panel rides over its image */
 .editorial{ align-items:center; }
 .editorial .panel{
@@ -261,8 +262,8 @@ h1,h2,h3,.display{ font-family:var(--font-display); font-weight:400; line-height
 .triptych .media{ border:none; box-shadow:0 60px 90px -50px rgba(33,25,19,.55); }
 @media (min-width: 961px){
   .triptych{ grid-template-columns:1.08fr 0.92fr 1.08fr; }
-  .triptych .media:first-child{ margin-left:calc(50% - 50vw); }
-  .triptych .media:last-child{ margin-right:calc(50% - 50vw); }
+  .triptych .media:first-child{ margin-left:calc(-1 * var(--bleed)); }
+  .triptych .media:last-child{ margin-right:calc(-1 * var(--bleed)); }
   .triptych .panel{ margin-inline:-70px; }
 }
 
@@ -459,13 +460,13 @@ h1,h2,h3,.display{ font-family:var(--font-display); font-weight:400; line-height
 [dir="rtl"] .quote-band blockquote{ font-family:"IBM Plex Sans Arabic",sans-serif; font-weight:300; line-height:1.8; }
 
 /* flip the edge bleeds and overlaps */
-[dir="rtl"] .bleed-right .media{ margin-right:0; margin-left:calc(50% - 50vw); }
-[dir="rtl"] .bleed-left .media{ margin-left:0; margin-right:calc(50% - 50vw); }
+[dir="rtl"] .bleed-right .media{ margin-right:0; margin-left:calc(-1 * var(--bleed)); }
+[dir="rtl"] .bleed-left .media{ margin-left:0; margin-right:calc(-1 * var(--bleed)); }
 @media (min-width: 961px){
   [dir="rtl"] .editorial .media + .panel{ margin-left:0; margin-right:-96px; }
   [dir="rtl"] .editorial .panel:first-child{ margin-right:0; margin-left:-96px; }
-  [dir="rtl"] .triptych .media:first-child{ margin-left:0; margin-right:calc(50% - 50vw); }
-  [dir="rtl"] .triptych .media:last-child{ margin-right:0; margin-left:calc(50% - 50vw); }
+  [dir="rtl"] .triptych .media:first-child{ margin-left:0; margin-right:calc(-1 * var(--bleed)); }
+  [dir="rtl"] .triptych .media:last-child{ margin-right:0; margin-left:calc(-1 * var(--bleed)); }
 }
 [dir="rtl"] .elevation::before{ border-right:2px solid var(--oxblood); }
 
