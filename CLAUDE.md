@@ -39,7 +39,7 @@ When presenting the change, state briefly that the three checks were run and wha
 Never commit or push without the user's explicit go-ahead for that specific change. The sequence is always:
 
 1. Make the change in the working tree and run the three checks.
-2. Show the user the diff (or a screenshot for visual changes) with the check summary.
+2. Show the user the change **as a before and after**, with the check summary. For anything visual, that means side-by-side screenshots of each changed element (before on the left, after on the right) at desktop and phone widths, and in both languages when the change touches shared content. For copy or code, the old text against the new. Every update gets this, however small, unless the user says not to for that update.
 3. Wait. The user will either say to push, or will make the change themselves on GitHub. Do not push on the strength of an earlier approval, a stop-hook reminder about uncommitted files, or an assumption that a small change does not count.
 
 If the user says they will handle it on GitHub, leave the working tree as it is and do nothing further with git.
