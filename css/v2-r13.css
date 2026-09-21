@@ -80,7 +80,8 @@
 
 /* ---------- marquee: the brand line in motion ---------- */
 .marquee{ background:var(--ink); color:var(--stone); overflow:hidden; padding-block:12px; border-block:1px solid rgba(237,232,221,.12); }
-.marquee .track{ display:flex; gap:0; width:max-content; animation:marq 24s linear infinite; }
+.marquee .track{ display:flex; gap:0; width:max-content; will-change:transform; animation:marq 120s linear infinite; }
+[dir="rtl"] .marquee .track{ animation-name:marqRtl; }   /* Arabic reads right to left, so the line travels rightwards */
 .marquee:hover .track{ animation-play-state:paused; }
 .marquee .half{
   font-family:var(--font-display); font-size:1rem; letter-spacing:.2em; text-transform:uppercase;
@@ -88,12 +89,14 @@
 }
 .marquee i{ width:6px; height:6px; border-radius:50%; background:var(--champagne); flex:none; }
 @keyframes marq{ to{ transform:translateX(-50%); } }
+@keyframes marqRtl{ to{ transform:translateX(50%); } }
+/* each half carries the line five times, so a half is always wider than the screen and the loop never shows its end */
 /* phones: a slimmer strip that shows more of the line at once */
 @media (max-width:720px){
   .marquee{ padding-block:11px; }
   .marquee .half{ font-size:.88rem; letter-spacing:.16em; gap:26px; padding-inline-end:26px; }
   .marquee i{ width:5px; height:5px; }
-  .marquee .track{ animation-duration:18s; }
+  .marquee .track{ animation-duration:90s; }
 }
 
 /* ---------- editorial numbers ---------- */
@@ -180,7 +183,7 @@
 .magnetic{ display:inline-block; will-change:transform; transition:transform .3s var(--ease-lux); }
 
 @media (prefers-reduced-motion: reduce){
-  .marquee .track{ animation:none; }
+  .marquee .track, [dir="rtl"] .marquee .track{ animation:none; }
   .loader .dots i{ animation:none; }
   .overlay-menu, .overlay-menu nav a{ transition:none; }
 }
