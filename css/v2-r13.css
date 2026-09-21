@@ -79,15 +79,22 @@
 @media (max-width:820px){ .overlay-menu .inner{ grid-template-columns:1fr; } .overlay-menu .side{ display:none; } }
 
 /* ---------- marquee: the brand line in motion ---------- */
-.marquee{ background:var(--ink); color:var(--stone); overflow:hidden; padding-block:22px; border-block:1px solid rgba(237,232,221,.12); }
-.marquee .track{ display:flex; gap:0; width:max-content; animation:marq 30s linear infinite; }
+.marquee{ background:var(--ink); color:var(--stone); overflow:hidden; padding-block:12px; border-block:1px solid rgba(237,232,221,.12); }
+.marquee .track{ display:flex; gap:0; width:max-content; animation:marq 24s linear infinite; }
 .marquee:hover .track{ animation-play-state:paused; }
 .marquee .half{
-  font-family:var(--font-display); font-size:1.35rem; letter-spacing:.22em; text-transform:uppercase;
-  white-space:nowrap; display:flex; align-items:center; gap:64px; padding-inline-end:64px;
+  font-family:var(--font-display); font-size:1rem; letter-spacing:.2em; text-transform:uppercase;
+  white-space:nowrap; display:flex; align-items:center; gap:48px; padding-inline-end:48px;
 }
-.marquee i{ width:8px; height:8px; border-radius:50%; background:var(--champagne); flex:none; }
+.marquee i{ width:6px; height:6px; border-radius:50%; background:var(--champagne); flex:none; }
 @keyframes marq{ to{ transform:translateX(-50%); } }
+/* phones: a slimmer strip that shows more of the line at once */
+@media (max-width:720px){
+  .marquee{ padding-block:11px; }
+  .marquee .half{ font-size:.88rem; letter-spacing:.16em; gap:26px; padding-inline-end:26px; }
+  .marquee i{ width:5px; height:5px; }
+  .marquee .track{ animation-duration:18s; }
+}
 
 /* ---------- editorial numbers ---------- */
 .figures-v2{ display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line); border-block:1px solid var(--line); }
