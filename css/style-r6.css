@@ -457,6 +457,7 @@ h1,h2,h3,.display{ font-family:var(--font-display); font-weight:400; line-height
 [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] .display,
 [dir="rtl"] .figures .num{ font-family:"IBM Plex Sans Arabic",sans-serif; font-weight:600; line-height:1.4; }
 [dir="rtl"] .btn, [dir="rtl"] .kicker, [dir="rtl"] .field label{ font-weight:700; }
+[dir="rtl"] .cinema h1{ font-family:"IBM Plex Sans Arabic",sans-serif; font-weight:500; }   /* .cinema h1 outranks the rule above; keep the Arabic face, one step lighter */
 [dir="rtl"] .quote-band blockquote{ font-family:"IBM Plex Sans Arabic",sans-serif; font-weight:300; line-height:1.8; }
 
 /* flip the edge bleeds and overlaps */
@@ -512,10 +513,10 @@ h1,h2,h3,.display{ font-family:var(--font-display); font-weight:400; line-height
 }
 .cinema h1{
   font-family:var(--font-display); font-weight:400;
-  font-size:clamp(2.7rem, 5.6vw, 4.9rem); max-width:17ch;
-  line-height:1.14; letter-spacing:.01em;
+  font-size:clamp(2.35rem, 4.8vw, 4.2rem); max-width:18ch;
+  line-height:1.18; letter-spacing:.02em;
   margin-bottom:22px; color:#FBF7EC;
-  text-shadow:0 1px 4px rgba(0,0,0,.4), 0 4px 22px rgba(0,0,0,.3);
+  text-shadow:0 2px 16px rgba(0,0,0,.28);   /* one soft shadow: the hard edge read as extra weight */
 }
 .cinema p.lead{
   max-width:52ch; color:rgba(248,244,235,.95); margin-bottom:34px;
